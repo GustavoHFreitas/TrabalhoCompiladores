@@ -222,36 +222,3 @@ class CoolParser(Parser):
             print(f"Erro Sintático. Estrutura inesperada '{p.value}' na linha {p.lineno}... o mundo é cheio de surpresas... vai dar tudo certo.", file=sys.stderr)
         else:
             print("Erro Sintático. O arquivo termina do nada... mas tá tudo bem, todos nos terminamos um dia.", file=sys.stderr)
-
-
-# -=-=- Execução -=-=-
-    
-if __name__ == '__main__':
-    import sys
-    import pprint
-    
-    if len(sys.argv) > 1:
-        arquivo_entrada = sys.argv[1]
-    else:
-        arquivo_entrada = 'teste.cl'
-
-    try:
-        with open(arquivo_entrada, 'r', encoding='utf-8') as f:
-            codigo_fonte = f.read()
-            
-        lexer = CoolLexer()
-        parser = CoolParser()
-        
-        print(f"Lendo '{arquivo_entrada}'...\n" + "-"*50)
-        
-        tokens = lexer.tokenize(codigo_fonte)
-        arvore = parser.parse(tokens)
-        
-        print("\nÁrvore Sintática:\n")
-        if arvore:
-            pprint.pprint(arvore)
-        else:
-            print("A árvore está vazia (ou ocorreu um erro fatal que impediu a criação).")
-            
-    except FileNotFoundError:
-        print(f"Erro. Arquivo '{arquivo_entrada}' não encontrado... as vezes é melhor assim.", file=sys.stderr)
