@@ -174,25 +174,3 @@ class CoolLexer(Lexer):
     def error(self, t):
         print(f"Erro léxico. Idiota. Tem um caractere ilegal '{t.value[0]}' na linha {self.lineno}", file=sys.stderr)
         self.index += 1
-
-
-# -=-=- Execução -=-=-
-
-if __name__ == '__main__':
-
-    if len(sys.argv) > 1:
-        arquivo_entrada = sys.argv[1]
-    else:
-        arquivo_entrada = 'teste.cl'
-
-    try:
-        with open(arquivo_entrada, 'r', encoding='utf-8') as f:
-            codigo_fonte = f.read()
-            
-        lexer = CoolLexer()
-        
-        for tok in lexer.tokenize(codigo_fonte):
-            print(f"Linha: {tok.lineno:02d} | Token: {tok.type:10} | Valor: {tok.value}")
-            
-    except FileNotFoundError:
-        print(f"Erro. Arquivo '{arquivo_entrada}' não encontrado. Imbecil.")
