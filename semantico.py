@@ -323,7 +323,7 @@ class Checador:
             
         for i, (fornecido, esperado) in enumerate(zip(t_args, params)):
             if not self.conforma(fornecido, esperado):
-                self._erro(f"Erro Semântico: Chamada '{nome_metodo}': {i+1} é '{fornecido}', esperava '{esperado}'.")
+                self._erro(f"Erro Semântico: Chamada '{nome_metodo}': Argumento {i+1} é '{fornecido}', esperava '{esperado}'.")
                 
         return t_expr if metodo['retorno'] == 'SELF_TYPE' else metodo['retorno']
 
@@ -432,7 +432,7 @@ class Checador:
     def visit_Variavel(self, no):
         tipo = self.escopo.get(no[1])
         if not tipo:
-            self._erro(f"Erro Semântico: Var '{no[1]}' não declarada.")
+            self._erro(f"Erro Semântico: Variavel '{no[1]}' não declarada.")
             return 'Object'
         return tipo
 
